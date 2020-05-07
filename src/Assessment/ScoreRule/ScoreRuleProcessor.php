@@ -38,6 +38,9 @@ class ScoreRuleProcessor
         $rule = [];
         $chains = $this->biz['score_rules'];
         foreach ($chains as $type => $className) {
+            if (empty($this->biz['score_rule.'.$type])) {
+                continue;
+            }
             $class = $this->biz['score_rule.'.$type];
             $chainRule = $class->processRule($question);
             if (!empty($chainRule)) {
@@ -51,6 +54,9 @@ class ScoreRuleProcessor
     public function setQuestionScore($question, $rules)
     {
         foreach ($rules as $rule) {
+            if (empty($this->biz['score_rule.'.$rule['name']])) {
+                continue;
+            }
             $ruleClass = $this->biz['score_rule.'.$rule['name']];
             $question = $ruleClass->setQuestionScore($question, $rule['score']);
         }
