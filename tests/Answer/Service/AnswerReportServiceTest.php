@@ -8,6 +8,19 @@ class AnswerReportServiceTest extends IntegrationTestCase
 {
     public function testGet()
     {
+        $this->mockObjectIntoBiz('ItemBank:Assessment:AssessmentService', [
+            [
+                'functionName' => 'findAssessmentQuestions',
+                'returnValue' => [
+                    ['question_id' => '1', 'score' => '2', 'section_id' => '1', 'seq' => 1],
+                    ['question_id' => '2', 'score' => '2', 'section_id' => '1', 'seq' => 2],
+                    ['question_id' => '3', 'score' => '2', 'section_id' => '1', 'seq' => 3],
+                    ['question_id' => '4', 'score' => '2', 'section_id' => '1', 'seq' => 4],
+                    ['question_id' => '5', 'score' => '2', 'section_id' => '1', 'seq' => 5],
+                ],
+            ]
+        ]);
+
         $answerReport = $this->fakeAnswerReport();
 
         $testAnswerReport = $this->getAnswerReportService()->get(1);
