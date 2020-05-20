@@ -133,6 +133,7 @@ class AnswerReportServiceImpl extends BaseService implements AnswerReportService
                 $questionReport['total_score'] = $assessmentQuestions[$questionReport['question_id']]['score'];
                 $questionReport['section_id'] = $assessmentQuestions[$questionReport['question_id']]['section_id'];
                 $questionReport['seq'] = $assessmentQuestions[$questionReport['question_id']]['seq'];
+                $questionReport['item_id'] = $assessmentQuestions[$questionReport['question_id']]['item_id'];
             }
         }
         return $this->sortPerArrayValue($answerQuestionReports, 'seq');

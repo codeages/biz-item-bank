@@ -12,11 +12,11 @@ class AnswerReportServiceTest extends IntegrationTestCase
             [
                 'functionName' => 'findAssessmentQuestions',
                 'returnValue' => [
-                    ['question_id' => '1', 'score' => '2', 'section_id' => '1', 'seq' => 1],
-                    ['question_id' => '2', 'score' => '2', 'section_id' => '1', 'seq' => 2],
-                    ['question_id' => '3', 'score' => '2', 'section_id' => '1', 'seq' => 3],
-                    ['question_id' => '4', 'score' => '2', 'section_id' => '1', 'seq' => 4],
-                    ['question_id' => '5', 'score' => '2', 'section_id' => '1', 'seq' => 5],
+                    ['item_id' => 1, 'question_id' => '1', 'score' => '2', 'section_id' => '1', 'seq' => 1],
+                    ['item_id' => 2, 'question_id' => '2', 'score' => '2', 'section_id' => '1', 'seq' => 2],
+                    ['item_id' => 3, 'question_id' => '3', 'score' => '2', 'section_id' => '1', 'seq' => 3],
+                    ['item_id' => 4, 'question_id' => '4', 'score' => '2', 'section_id' => '1', 'seq' => 4],
+                    ['item_id' => 5, 'question_id' => '5', 'score' => '2', 'section_id' => '1', 'seq' => 5],
                 ],
             ]
         ]);
