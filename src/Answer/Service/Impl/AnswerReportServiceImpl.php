@@ -132,9 +132,27 @@ class AnswerReportServiceImpl extends BaseService implements AnswerReportService
             if (!empty($assessmentQuestions[$questionReport['question_id']])) {
                 $questionReport['total_score'] = $assessmentQuestions[$questionReport['question_id']]['score'];
                 $questionReport['section_id'] = $assessmentQuestions[$questionReport['question_id']]['section_id'];
+                $questionReport['seq'] = $assessmentQuestions[$questionReport['question_id']]['seq'];
+                $questionReport['item_id'] = $assessmentQuestions[$questionReport['question_id']]['item_id'];
             }
         }
-        return $answerQuestionReports;
+        return $this->sortPerArrayValue($answerQuestionReports, 'seq');
+    }
+
+    protected function sortPerArrayValue($arr, $attrName, $ascending = true)
+    {
+        usort(
+            $arr,
+            function ($first, $next) use ($ascending, $attrName) {
+                if ($ascending) {
+                    return $first[$attrName] > $next[$attrName] ? 1 : -1;
+                } else {
+                    return $first[$attrName] < $next[$attrName] ? 1 : -1;
+                }
+            }
+        );
+    
+        return $arr;
     }
 
     public function getSimple($id)
