@@ -208,6 +208,7 @@ class AnswerServiceTest extends IntegrationTestCase
                 'returnValue' => [
                     'id' => '1',
                     'need_score' => 1,
+                    'manual_marking' => 1,
                 ],
             ],
             [
@@ -224,6 +225,8 @@ class AnswerServiceTest extends IntegrationTestCase
                     'id' => '1',
                     'status' => AnswerService::ANSWER_RECORD_STATUS_DOING,
                     'assessment_id' => 1,
+                    'answer_scene_id' => 1,
+                    'user_id' => 1,
                 ],
             ],
             [
@@ -240,6 +243,7 @@ class AnswerServiceTest extends IntegrationTestCase
                 'functionName' => 'create',
                 'returnValue' => [
                     'id' => 1,
+                    'answer_scene_id' => 1,
                 ],
             ],
         ]);
@@ -350,6 +354,8 @@ class AnswerServiceTest extends IntegrationTestCase
                     'id' => '1',
                     'status' => AnswerService::ANSWER_RECORD_STATUS_REVIEWING,
                     'assessment_id' => 1,
+                    'answer_scene_id' => 1,
+                    'user_id' => 1,
                 ],
             ],
             [

@@ -67,8 +67,7 @@ class InitItemBank extends Migration
                 `created_time` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '创建时间',
                 `updated_time` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '最后更新时间',
                 PRIMARY KEY (`id`),
-                KEY `answer_record_id` (`answer_record_id`),
-                UNIQUE KEY `identify` (`identify`)
+                KEY `answer_record_id` (`answer_record_id`)
             ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='题目问题报告表';
 
             CREATE TABLE `biz_answer_scene` (
@@ -149,8 +148,8 @@ class InitItemBank extends Migration
                 `category_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '类别',
                 `difficulty` varchar(64) NOT NULL DEFAULT 'normal' COMMENT '难度',
                 `question_num` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '问题数量',
-                `created_user_id` int(10) unsigned NOT NULL COMMENT '创建者',
-                `updated_user_id` int(10) unsigned NOT NULL COMMENT '最新更新用户',
+                `created_user_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '创建者',
+                `updated_user_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '最新更新用户',
                 `updated_time` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '更新时间',
                 `created_time` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '创建时间',
                 PRIMARY KEY (`id`),
@@ -164,8 +163,8 @@ class InitItemBank extends Migration
                 `name` varchar(1024) NOT NULL COMMENT '题库名称',
                 `assessment_num` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '试卷数量',
                 `item_num` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '题目数量',
-                `created_user_id` int(10) unsigned NOT NULL COMMENT '创建者',
-                `updated_user_id` int(10) unsigned NOT NULL COMMENT '最新更新用户',
+                `created_user_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '创建者',
+                `updated_user_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '最新更新用户',
                 `created_time` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '创建时间',
                 `updated_time` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '更新时间',
                 PRIMARY KEY (`id`)
@@ -177,8 +176,8 @@ class InitItemBank extends Migration
                 `weight` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '权重',
                 `parent_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '父级分类id',
                 `bank_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '所属题库id',
-                `created_user_id` int(10) unsigned NOT NULL COMMENT '创建者',
-                `updated_user_id` int(10) unsigned NOT NULL COMMENT '最新更新用户',
+                `created_user_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '创建者',
+                `updated_user_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '最新更新用户',
                 `created_time` int(10) unsigned NOT NULL DEFAULT '0',
                 `updated_time` int(10) unsigned NOT NULL DEFAULT '0',
                 PRIMARY KEY (`id`),
@@ -195,8 +194,8 @@ class InitItemBank extends Migration
                 `response_points` text COMMENT '答题点信息',
                 `answer` text COMMENT '参考答案',
                 `analysis` text COMMENT '问题解析',
-                `created_user_id` int(10) unsigned NOT NULL COMMENT '创建者',
-                `updated_user_id` int(10) unsigned NOT NULL COMMENT '最新更新用户',
+                `created_user_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '创建者',
+                `updated_user_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '最新更新用户',
                 `updated_time` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '更新时间',
                 `created_time` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '创建时间',
                 PRIMARY KEY (`id`),
