@@ -125,7 +125,7 @@ class AnswerReportServiceImpl extends BaseService implements AnswerReportService
         return $answerReport;
     }
 
-    protected function wrapperAnswerQuestionReports($answerQuestionReports, $assessmentId)
+    public function wrapperAnswerQuestionReports($answerQuestionReports, $assessmentId)
     {
         $assessmentQuestions = $this->getAssessmentService()->findAssessmentQuestions($assessmentId);
         foreach ($answerQuestionReports as &$questionReport) {

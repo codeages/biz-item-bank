@@ -501,6 +501,40 @@ class AnswerServiceTest extends IntegrationTestCase
             ],
         ]);
 
+        $this->mockObjectIntoBiz('ItemBank:Answer:AnswerReportService', [
+            [
+                'functionName' => 'wrapperAnswerQuestionReports',
+                'returnValue' => [
+                    [
+                        'id' => 1,
+                        'identify' => '1_1',
+                        'answer_record_id' => 1,
+                        'assessment_id' => 1,
+                        'section_id' => 1,
+                        'item_id' => 1,
+                        'question_id' => 1,
+                        'score' => 1,
+                        'total_score' => 1,
+                        'response' => [],
+                        'status' => 'reviewing',
+                    ],
+                    [
+                        'id' => 2,
+                        'identify' => '1_1',
+                        'answer_record_id' => 1,
+                        'assessment_id' => 1,
+                        'section_id' => 1,
+                        'item_id' => 2,
+                        'question_id' => 2,
+                        'score' => 1,
+                        'total_score' => 1,
+                        'response' => [],
+                        'status' => 'reviewing',
+                    ],
+                ],
+            ],
+        ]);
+
         $this->mockObjectIntoBiz('ItemBank:Answer:AnswerQuestionReportService', [
             [
                 'functionName' => 'findByAnswerRecordId',
