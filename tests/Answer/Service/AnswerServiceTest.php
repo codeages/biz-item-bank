@@ -472,18 +472,18 @@ class AnswerServiceTest extends IntegrationTestCase
         $answerReport = $this->getAnswerService()->review($reviewReport);
 
         $aswerQuestionRerport = ArrayToolkit::index($this->getAnswerQuestionReportDao()->search(['ids' => [1, 2, 3, 4, 5]], [], 0, 5), 'id');
-        $this->assertEquals($aswerQuestionRerport['1']['status'], 'no_answer');
+        $this->assertEquals($aswerQuestionRerport['1']['status'], 'right');
         $this->assertEquals($aswerQuestionRerport['2']['status'], 'right');
         $this->assertEquals($aswerQuestionRerport['2']['score'], 2);
         $this->assertEquals($aswerQuestionRerport['3']['status'], 'wrong');
         $this->assertEquals($aswerQuestionRerport['4']['status'], 'no_answer');
         $this->assertEquals($aswerQuestionRerport['4']['score'], 0);
         $this->assertEquals($aswerQuestionRerport['5']['status'], 'part_right');
-        $this->assertEquals($answerReport['right_rate'], 20);
-        $this->assertEquals($answerReport['objective_score'], 1);
+        $this->assertEquals($answerReport['right_rate'], 40);
+        $this->assertEquals($answerReport['objective_score'], 3);
         $this->assertEquals($answerReport['subjective_score'], 2);
-        $this->assertEquals($answerReport['right_question_count'], 1);
-        $this->assertEquals($answerReport['score'], 3);
+        $this->assertEquals($answerReport['right_question_count'], 2);
+        $this->assertEquals($answerReport['score'], 5);
         $this->assertEquals($answerReport['grade'], 'excellent');
         $this->assertEquals($answerReport['comment'], '总体评语');
     }

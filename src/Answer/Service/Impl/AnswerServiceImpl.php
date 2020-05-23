@@ -259,7 +259,6 @@ class AnswerServiceImpl extends BaseService implements AnswerService
         $answerScene = $this->getAnswerSceneService()->get($answerRecord['answer_scene_id']);
         $reviewQuestionReports = ArrayToolkit::index($reviewReport['question_reports'], 'id');
         $conditions = [
-            'status' => AnswerQuestionReportService::STATUS_REVIEWING,
             'ids' => ArrayToolkit::column($reviewReport['question_reports'], 'id'),
         ];
         $questionReports = $this->getAnswerQuestionReportService()->search($conditions, [], 0, $this->getAnswerQuestionReportService()->count($conditions));
@@ -351,8 +350,8 @@ class AnswerServiceImpl extends BaseService implements AnswerService
         }
 
         $answerQuestionReports = $this->getAnswerReportService()->wrapperAnswerQuestionReports(
-            $this->getAnswerQuestionReportService()->findByAnswerRecordId($answerRecordId),
-            $answerRecord['assessment_id']
+            $answerRecord['id'],
+            $this->getAnswerQuestionReportService()->findByAnswerRecordId($answerRecordId)
         );
         $attachments = $this->getAttachmentService()->findAttachmentsByTargetIdsAndTargetType(
             ArrayToolkit::column($answerQuestionReports, 'id'),

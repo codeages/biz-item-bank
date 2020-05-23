@@ -24,16 +24,14 @@ class AnswerReportServiceTest extends IntegrationTestCase
         $answerReport = $this->fakeAnswerReport();
 
         $testAnswerReport = $this->getAnswerReportService()->get(1);
-
         $this->assertEquals($answerReport['id'], $testAnswerReport['id']);
-        $this->assertEquals($testAnswerReport['section_reports'][0]['item_reports'][0]['question_reports'][0]['id'], 1);
         $this->assertEquals($testAnswerReport['section_reports'][0]['total_score'], 10);
         $this->assertEquals($testAnswerReport['section_reports'][0]['score'], 0);
         $this->assertEquals($testAnswerReport['section_reports'][0]['question_count'], 5);
         $this->assertEquals($testAnswerReport['section_reports'][0]['right_question_num'], 1);
-        $this->assertEquals($testAnswerReport['section_reports'][0]['wrong_question_num'], 1);
-        $this->assertEquals($testAnswerReport['section_reports'][0]['reviewing_question_num'], 1);
-        $this->assertEquals($testAnswerReport['section_reports'][0]['no_answer_question_num'], 1);
+        $this->assertEquals($testAnswerReport['section_reports'][0]['wrong_question_num'], 0);
+        $this->assertEquals($testAnswerReport['section_reports'][0]['reviewing_question_num'], 0);
+        $this->assertEquals($testAnswerReport['section_reports'][0]['no_answer_question_num'], 3);
         $this->assertEquals($testAnswerReport['section_reports'][0]['part_right_question_num'], 1);
     }
 

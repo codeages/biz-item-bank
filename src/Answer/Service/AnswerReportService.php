@@ -20,5 +20,5 @@ interface AnswerReportService
 
     public function count($conditions);
 
-    public function wrapperAnswerQuestionReports($answerQuestionReports, $assessmentId);
+    public function wrapperAnswerQuestionReports($answerRecordId, $answerQuestionReports);
 }
