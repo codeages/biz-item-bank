@@ -513,6 +513,16 @@ class AnswerServiceImpl extends BaseService implements AnswerService
             throw $this->createInvalidArgumentException('assessment_id invalid.');
         }
 
+        foreach ($assessmentResponse['section_responses'] as &$sectionResponse) {
+            foreach ($sectionResponse['item_responses'] as &$itemResponse) {
+                foreach ($itemResponse['question_responses'] as &$questionResponse) {
+                    foreach ($questionResponse['response'] as &$response) {
+                        $response = trim($response);
+                    }
+                }
+            }
+        }
+
         return $assessmentResponse;
     }
 
