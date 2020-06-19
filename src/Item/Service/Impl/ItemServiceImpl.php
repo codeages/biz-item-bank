@@ -130,6 +130,10 @@ class ItemServiceImpl extends BaseService implements ItemService
                 if (0 < $item['category_id']) {
                     $this->getItemCategoryService()->updateItemNumAndQuestionNum($item['category_id'], 1, $item['question_num']);
                 }
+            } else {
+                if (0 < $originItem['category_id']) {
+                    $this->getItemCategoryService()->updateItemNumAndQuestionNum($item['category_id'], 0, -$originItem['question_num'] + $item['question_num']);
+                }
             }
 
             $this->dispatch('item.update', $item, ['argument' => $arguments]);
