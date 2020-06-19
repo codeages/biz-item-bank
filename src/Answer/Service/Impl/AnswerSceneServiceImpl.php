@@ -55,6 +55,7 @@ class AnswerSceneServiceImpl extends BaseService implements AnswerSceneService
             'need_score' => ['integer', ['in', [0, 1]]],
             'manual_marking' => ['integer', ['in', [0, 1]]],
             'start_time' => ['integer'],
+            'doing_look_analysis' => ['integer', ['in', [0, 1]]],
             'pass_score' => ['numeric', ['min', 0]],
             'enable_facein' => ['integer', ['in', [0, 1]]],
         ]);
