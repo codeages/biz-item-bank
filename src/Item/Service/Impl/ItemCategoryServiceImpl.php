@@ -211,6 +211,11 @@ class ItemCategoryServiceImpl extends BaseService implements ItemCategoryService
         return [$map, $tree];
     }
 
+    public function updateItemNumAndQuestionNum($id, $diffItemNum = 0, $diffQuestionNum = 0)
+    {
+        return $this->getItemCategoryDao()->wave([$id], ['item_num' => $diffItemNum, 'question_num' => $diffQuestionNum]);
+    }
+
     /**
      * @return ItemBankService
      */
