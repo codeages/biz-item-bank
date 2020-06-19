@@ -232,6 +232,8 @@ class ItemCategoryServiceImpl extends BaseService implements ItemCategoryService
                 'item_num' => count($itemGroup),
             ];
         }
+
+        $this->getItemCategoryDao()->resetItemNumAndQuestionNumByBankId($bankId);
         $this->getItemCategoryDao()->batchUpdate(ArrayToolkit::column($updateCategories, 'id'), $updateCategories);
     }
 

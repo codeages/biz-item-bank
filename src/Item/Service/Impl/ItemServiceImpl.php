@@ -278,11 +278,11 @@ class ItemServiceImpl extends BaseService implements ItemService
         try {
             $this->beginTransaction();
 
-            $category = $this->getItemCategoryService()->getItemCategory($categoryId);
-
-            $this->getItemCategoryService()->buildItemNumAndQuestionNumBybankId($category['bank_id']);
-
             $this->getItemDao()->batchUpdate($ids, $updateFields, 'id');
+
+            $item = $this->getItem($ids[0]);
+
+            $this->getItemCategoryService()->buildItemNumAndQuestionNumBybankId($item['bank_id']);
 
             $this->commit();
         } catch (\Exception $e) {
