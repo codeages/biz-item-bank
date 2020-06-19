@@ -275,7 +275,21 @@ class ItemServiceImpl extends BaseService implements ItemService
             $updateFields[] = ['category_id' => $categoryId];
         }
 
-        return $this->getItemDao()->batchUpdate($ids, $updateFields, 'id');
+        try {
+            $this->beginTransaction();
+
+            $category = $this->getItemCategoryService()->getItemCategory($categoryId);
+
+            $this->getItemCategoryService()->buildItemNumAndQuestionNumBybankId($category['bank_id']);
+
+            $this->getItemDao()->batchUpdate($ids, $updateFields, 'id');
+
+            $this->commit();
+        } catch (\Exception $e) {
+            $this->rollback();
+            throw $e;
+        }
+
     }
 
     public function review($itemResponses)

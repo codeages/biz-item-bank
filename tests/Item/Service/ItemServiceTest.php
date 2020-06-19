@@ -860,10 +860,14 @@ class ItemServiceTest extends IntegrationTestCase
         $this->mockObjectIntoBiz('ItemBank:Item:ItemCategoryService', [
             [
                 'functionName' => 'getItemCategory',
-                'returnValue' => ['id' => 1],
+                'returnValue' => ['id' => 1, 'bank_id' => 1],
             ],
             [
                 'functionName' => 'updateItemNumAndQuestionNum',
+                'returnValue' => 1,
+            ],
+            [
+                'functionName' => 'buildItemNumAndQuestionNumBybankId',
                 'returnValue' => 1,
             ]
         ]);
