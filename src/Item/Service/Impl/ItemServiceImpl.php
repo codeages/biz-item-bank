@@ -74,6 +74,9 @@ class ItemServiceImpl extends BaseService implements ItemService
                     $savedItems[] = array_merge($savedItems, $savedItem);
                 }
             }
+
+            $this->dispatch('item.import', $savedItems);
+
             $this->commit();
 
             return $savedItems;
@@ -81,8 +84,6 @@ class ItemServiceImpl extends BaseService implements ItemService
             $this->rollback();
             throw $e;
         }
-
-        $this->dispatch('item.import', $savedItems);
     }
 
     public function readWordFile($wordPath, $resourcePath = '')
