@@ -105,7 +105,7 @@ class ItemServiceImpl extends BaseService implements ItemService
 
     public function updateItem($id, $item)
     {
-        $originItem = $this->getItem($id);
+        $originItem = $this->getItemWithQuestions($id);
         if (empty($originItem)) {
             throw new ItemException('Item not found', ErrorCode::ITEM_NOT_FOUND);
         }
