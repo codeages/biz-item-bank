@@ -309,7 +309,6 @@ class AnswerServiceImpl extends BaseService implements AnswerService
         }
 
         $this->dispatch('answer.finished', $answerReport);
-        $this->getAnswerSceneService()->buildAnswerSceneReport($answerReport['answer_scene_id']);
 
         return $answerReport;
     }
