@@ -313,7 +313,7 @@ class AnswerSceneServiceTest extends IntegrationTestCase
 
     public function testGetAnswerSceneReport()
     {
-         $this->fakeAnswerScene();
+        $this->fakeAnswerScene();
 
         $this->mockObjectIntoBiz('ItemBank:Answer:AnswerReportService', [
             [
