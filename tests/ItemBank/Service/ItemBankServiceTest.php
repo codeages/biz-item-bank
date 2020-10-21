@@ -124,12 +124,12 @@ class ItemBankServiceTest extends IntegrationTestCase
         $itemBank = $this->getItemBankDao()->get($itemBank['id']);
         $this->assertEquals(2, $itemBank['assessment_num']);
     }
-    
+
     public function testUpdateItemNumAndQuestionNum()
     {
         $itemBank = $this->createItemBank(['name' => 'default']);
-        $this->getItemBankService()->updateItemNumAndQuestionNum($itemBank['id'], 3, 2);
-        $this->getItemBankService()->updateItemNumAndQuestionNum($itemBank['id'], -1, -1);
+        $this->getItemBankService()->updateItemNumAndQuestionNum($itemBank['id']);
+        $this->getItemBankService()->updateItemNumAndQuestionNum($itemBank['id']);
         $itemBank = $this->getItemBankDao()->get($itemBank['id']);
         $this->assertEquals(1, $itemBank['question_num']);
         $this->assertEquals(2, $itemBank['item_num']);
