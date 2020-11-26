@@ -16,16 +16,8 @@ class AnswerServiceImpl extends BaseService implements AnswerService
 {
     public function startAnswer($answerSceneId, $assessmentId, $userId)
     {
-        $latestAnswerRecord = $this->getAnswerRecordService()->getLatestAnswerRecordByAnswerSceneIdAndUserId($answerSceneId, $userId);
-
-        if (empty($latestAnswerRecord)) {
-            if (!$this->getAnswerSceneService()->canStart($answerSceneId)) {
-                throw new AnswerSceneException('AnswerScene did not start.', ErrorCode::ANSWER_SCENE_NOTSTART);
-            }
-        } else {
-            if (!$this->getAnswerSceneService()->canRestart($answerSceneId, $userId)) {
-                throw new AnswerSceneException('AnswerScene did not restart.', ErrorCode::ANSWER_SCENE_CANNOT_RESTART);
-            }
+        if (!$this->getAnswerSceneService()->canStart($answerSceneId, $userId)) {
+            throw new AnswerSceneException('AnswerScene did not start.', ErrorCode::ANSWER_SCENE_NOTSTART);
         }
 
         $answerRecord = $this->getAnswerRecordService()->create([
@@ -94,9 +86,6 @@ class AnswerServiceImpl extends BaseService implements AnswerService
         }
 
         $this->dispatch('answer.submitted', $answerRecord);
-        if (true === $canFinished) {
-            $this->getAnswerSceneService()->buildAnswerSceneReport($answerReport['answer_scene_id']);
-        }
 
         return $answerRecord;
     }
@@ -137,7 +126,7 @@ class AnswerServiceImpl extends BaseService implements AnswerService
 
         $rightCount = empty($answerQuestionReports[AnswerQuestionReportService::STATUS_RIGHT]) ? 0 : count($answerQuestionReports[AnswerQuestionReportService::STATUS_RIGHT]);
 
-        return intval($rightCount / $totalCount * 100 + 0.5);
+        return round($rightCount / $totalCount * 100, 1);
     }
 
     protected function sumScore(array $answerQuestionReports)
@@ -317,7 +306,6 @@ class AnswerServiceImpl extends BaseService implements AnswerService
         }
 
         $this->dispatch('answer.finished', $answerReport);
-        $this->getAnswerSceneService()->buildAnswerSceneReport($answerReport['answer_scene_id']);
 
         return $answerReport;
     }
@@ -329,14 +317,16 @@ class AnswerServiceImpl extends BaseService implements AnswerService
         }
         
         if (0 == $answerScene['need_score']) {
-            return [0, AnswerQuestionReportService::STATUS_PART_RIGHT];
+            if (empty($reviewQuestionReport['status'])) {
+                $status = AnswerQuestionReportService::STATUS_RIGHT;
+            } else {
+                $status = $reviewQuestionReport['status'] == AnswerQuestionReportService::STATUS_WRONG ? AnswerQuestionReportService::STATUS_WRONG : AnswerQuestionReportService::STATUS_RIGHT;
+            }
+            return [0, $status];
         }
 
         $reviewQuestionReport['score'] = empty($reviewQuestionReport['score']) ? 0 : $reviewQuestionReport['score'];
-        if (empty($questionReport['response'])) {
-            $score = 0;
-            $status = AnswerQuestionReportService::STATUS_NOANSWER;
-        } elseif (0 == $reviewQuestionReport['score']) {
+        if (0 == $reviewQuestionReport['score']) {
             $score = 0;
             $status = AnswerQuestionReportService::STATUS_WRONG;
         } elseif ($reviewQuestionReport['score'] >= $assessmentQuestion['score']) {
@@ -468,6 +458,7 @@ class AnswerServiceImpl extends BaseService implements AnswerService
             throw $e;
         }
 
+        $this->dispatch('answer.saved', $assessmentResponse);
         return $assessmentResponse;
     }
 
@@ -511,6 +502,16 @@ class AnswerServiceImpl extends BaseService implements AnswerService
 
         if ($answerRecord['assessment_id'] != $assessmentResponse['assessment_id']) {
             throw $this->createInvalidArgumentException('assessment_id invalid.');
+        }
+
+        foreach ($assessmentResponse['section_responses'] as &$sectionResponse) {
+            foreach ($sectionResponse['item_responses'] as &$itemResponse) {
+                foreach ($itemResponse['question_responses'] as &$questionResponse) {
+                    foreach ($questionResponse['response'] as &$response) {
+                        $response = trim($response);
+                    }
+                }
+            }
         }
 
         return $assessmentResponse;

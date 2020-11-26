@@ -18,5 +18,5 @@ interface ItemBankService
 
     public function updateAssessmentNum($id, $diff);
 
-    public function updateItemNum($id, $diff);
+    public function updateItemNumAndQuestionNum($id);
 }
