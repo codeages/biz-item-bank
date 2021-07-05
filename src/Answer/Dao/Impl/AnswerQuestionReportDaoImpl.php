@@ -29,6 +29,8 @@ class AnswerQuestionReportDaoImpl extends AdvancedDaoImpl implements AnswerQuest
                 'answer_record_id IN (:answer_record_ids)',
                 'status = :status',
                 'id IN (:ids)',
+                'assessment_id = :assessment_id',
+                'question_id = :question_id',
             ],
         ];
     }
