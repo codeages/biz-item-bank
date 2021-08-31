@@ -37,7 +37,6 @@ class AnswerRecordDaoImpl extends GeneralDaoImpl implements AnswerRecordDao
         return $builder->execute()->fetchAll();
     }
 
-
     public function declares()
     {
         return [
