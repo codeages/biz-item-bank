@@ -35,6 +35,7 @@ class AnswerQuestionReportDaoImpl extends AdvancedDaoImpl implements AnswerQuest
                 'end_time <= :endTime_LE',
                 'answer_record_id IN (:answer_record_ids)',
                 'status = :status',
+                'status IN (:statues)',
                 'id IN (:ids)',
             ],
         ];
